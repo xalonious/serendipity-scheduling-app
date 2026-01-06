@@ -1,0 +1,58 @@
+datasource db {
+  provider = "mysql"
+  url      = env("MYSQL_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum TrainingSlotEnum {
+  T0000
+  T0300
+  T0600
+  T0800
+  T1000
+  T1200
+  T1500
+  T1700
+  T2000
+  T2200
+}
+
+model TrainingSlot {
+  id        Int              @id @default(autoincrement())
+  date      DateTime
+  slot      TrainingSlotEnum
+  userId    String?
+  claimedAt DateTime?
+
+  @@unique([date, slot])
+}
+
+model ShiftSlot {
+  id         Int       @id @default(autoincrement())
+  startTime  DateTime
+  endTime    DateTime
+  userId     String?
+  rewardRobux Int?
+  claimedAt  DateTime?
+  createdAt  DateTime  @default(now())
+
+  @@index([startTime, endTime])
+}
+
+model HistoricalShift {
+  id           Int      @id @default(autoincrement())
+  startTime    DateTime
+  endTime      DateTime
+  hostUserId   String
+  bucket       Int
+  durationMins Int
+  rewardRobux  Int?
+  createdAt    DateTime @default(now())
+
+  @@index([startTime])
+  @@index([bucket])
+  @@index([hostUserId, startTime])
+}

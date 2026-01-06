@@ -1,0 +1,81 @@
+/* src/animations.css */
+
+/* If you want to keep the same “CSS variable” names from your original: */
+:root {
+  --primary-bg: #FEF5F7;
+  --hero-bg-start: #FFD1DC;
+  --hero-bg-end:   #FFB3C6;
+  --accent-primary:   #FF6B6B;
+  --accent-secondary: #FF8FAB;
+  --footer-bg: #FFC0CB;
+  --discord-blue: #7289DA;
+  --roblox-red:   #FF6B6B;
+}
+
+/* Only the keyframes & classes that Tailwind can’t generate for you: */
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes pop {
+  0%   { transform: scale(0); opacity: 0; }
+  60%  { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  0%   { opacity: 0; transform: translateY(25px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleInX {
+  0%   { transform: scaleX(0); opacity: 0; }
+  100% { transform: scaleX(1); opacity: 1; }
+}
+
+@keyframes bounceArrow {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
+}
+
+@keyframes fadeInUpCard {
+  0%   { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Now create simple “utility” classes that wrap those keyframes: */
+.animate-gradientShift {
+  animation: gradientShift 15s ease infinite;
+  background-size: 200% 200%;
+}
+
+.animate-pop {
+  animation: pop 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) both;
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.animate-scaleInX {
+  animation: scaleInX 0.8s ease forwards;
+}
+
+.animate-bounceArrow {
+  animation: bounceArrow 2s infinite 2.5s;
+}
+
+.animate-fadeInUpCard {
+  animation: fadeInUpCard 0.6s ease forwards;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}

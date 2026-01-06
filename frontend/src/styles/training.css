@@ -1,0 +1,140 @@
+:root {
+  --pink-light:   #ffe6ea;
+  --pink-medium:  #ffb3c1;
+  --pink-dark:    #ff6690;
+  --gray-light:   #f7f7f7;
+  --gray-medium:  #ddd;
+  --gray-dark:    #555;
+  --white:        #ffffff;
+  --shadow:       rgba(0, 0, 0, 0.1);
+}
+
+.schedule-container {
+  overflow-x: auto;
+  margin-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.schedule-grid {
+  display: grid;
+  grid-template-columns: 120px repeat(7, minmax(140px, 1fr));
+  border: 1px solid var(--gray-medium);
+  border-right: none;
+  border-bottom: none;
+}
+
+.grid-cell {
+  border-bottom: 1px solid var(--gray-medium);
+  border-right: 1px solid var(--gray-medium);
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--white);
+}
+
+.grid-cell.corner {
+  background: var(--white);
+}
+
+.grid-cell.header {
+  background: var(--pink-medium);
+  color: var(--white);
+  font-weight: 700;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  font-size: 0.95rem;
+}
+
+.grid-cell.time-cell {
+  background: var(--gray-light);
+  font-weight: 500;
+  justify-content: flex-end;
+  font-size: 0.9rem;
+}
+
+
+.grid-cell.slot-cell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; 
+  gap: 0.5rem;
+  min-width: 0;                    
+}
+
+.slot-user {
+  font-size: 0.85rem;
+  color: var(--gray-dark);
+
+  flex: 1 1 0;
+  min-width: 0;           
+  overflow: hidden;       
+  text-overflow: ellipsis;
+  white-space: nowrap;    
+}
+
+.slot-button {
+  border: none;
+  border-radius: 1rem;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  flex: 0 0 auto;         
+}
+
+.slot-button.claim {
+  background: var(--gray-light);
+  color: var(--gray-dark);
+}
+.slot-button.claim:hover:not(.disabled) {
+  background: var(--pink-light);
+}
+
+.slot-button.unclaim {
+  background: var(--pink-dark);
+  color: var(--white);
+}
+.slot-button.unclaim:hover {
+  background: var(--pink-medium);
+}
+
+.slot-button.claimed {
+  background: var(--gray-medium);
+  color: var(--white);
+}
+.slot-button.claimed.disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.slot-button.disabled {
+  pointer-events: none;
+}
+
+.grid-cell.slot-cell.slot-claimed {
+  background: var(--pink-light);
+}
+
+.placeholder {
+  text-align: center;
+  color: var(--gray-medium);
+  padding: 2rem;
+  font-style: italic;
+}
+
+
+@media (max-width: 640px) {
+  .schedule-grid {
+    grid-template-columns:
+      80px
+      repeat(7, minmax(100px, 1fr));
+    min-width: max-content;
+  }
+
+  .slot-button {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+}
